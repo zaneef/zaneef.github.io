@@ -8,9 +8,9 @@ comments: false
 
 I'm **zan.e**, I'm an italian IT student at Ca' Foscari University of Venice.
 
-I'm interested in almost every aspect of cybersecurity but I primarily focus on web and network security. I'm kinda attracted to cryptography too but I don't really understand that shenanigans.
+I'm interested in almost every aspect of cybersecurity but I primarily focus on web and network security. I'm kinda attracted to cryptography too but I don't really understand those shenanigans.
 
-I'm also an active CTF player <a href = "https://ctftime.org/team/194130">@bhackari</a>.
+I'm also an active CTF player <a href="https://ctftime.org/team/194130" target="_blank">@bhackari</a>.
 
 **may u needs ✨**
 
