@@ -2,15 +2,15 @@
 title: Colophon
 permalink: /about/
 layout: page
-excerpt: Hello peeps, I'm student of computer science from Banyuwangi, living in Jogjakarta. This blog for documentation about my programming journey, running on jekyll, hosting on netlify and using my own simple theme.
+excerpt: Hi there, I'm zan.e and I'm a student and a CTF player. This is my simple blog
 comments: false
 ---
 
-He's a student from Banyuwangi, living in Jogjakarta. the blog for documentation about his programming 🎒 journey, running on jekyll, hosting on [now.sh](http://now.sh) and using his own theme, he name it <a href="https://github.com/piharpi/jekyll-klise" target="_blank" rel="noopener">klisé</a>, he also loves to learning web technology; but he often forgot, that a reason why him doing the writing.
+I'm **zan.e**, I'm an italian IT student at Ca' Foscari University of Venice.
 
-If you have a question about him or else, just send a letter to him.
+I'm interested in almost every aspect of cybersecurity but I primarily focus on web and network security. I'm kinda attracted to cryptography too but I don't really understand that shenanigans.
 
-You can [report](http://github.com/piharpi/jekyll-klise/issues/new) if there is an broken link(s) or somethings else.
+I'm also an active CTF player <a href = "https://ctftime.org/team/194130">@bhackari</a>.
 
 **may u needs ✨**
 
