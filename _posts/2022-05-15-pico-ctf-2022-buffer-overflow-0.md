@@ -75,15 +75,15 @@ int main(int argc, char **argv){
 }
 ```
 
-There's only one function that should stands out and it's `sigsegv_handler`. This function receives an integer and prints out the flag. We can see that in this line `sigsegv_handler` is passed as an argument to another function named `signal`
+There's only one function that should stands out and it's `sigsegv_handler()`. This function receives an integer and prints out the flag. We can see that in this line `sigsegv_handler()` is passed as an argument to another function named `signal()`
 
 ```c
 signal(SIGSEGV, sigsegv_handler); // Set up signal handler
 ```
 
-With a simple online search we can read that `signal` _"sets a function to handle signal i.e. a signal handler with signal numer sig"_ and `SIGSEV` is _"a signal propagated when a program tries to read or write outside the memory it is allocated for it"_. With these two definitions we can deduce that this program, when there's an invalid storage read or write, calls the handler that prints the flag.
+With a simple online search we can read that `signal()` _"sets a function to handle signal i.e. a signal handler with signal numer sig"_ and `SIGSEV` is _"a signal propagated when a program tries to read or write outside the memory it is allocated for it"_. With these two definitions we can deduce that this program, when there's an invalid storage read or write, calls the handler that prints the flag.
 
-We have to write or read outside the program boundaries. Check the source code again and we can see that the function `vuln` uses `strcpy` to copy the input string into a buffer. `strcpy` is a function vulnerable to buffer overflow so if we pass an input larger than the buffer that sould contain it, `strcpy` will try to write it anyway and will overwrite the memory addresses after the limits.
+We have to write or read outside the program boundaries. Check the source code again and we can see that the function `vuln()` uses `strcpy()` to copy the input string into a buffer. `strcpy()` is a function vulnerable to buffer overflow so if we pass an input larger than the buffer that sould contain it, `strcpy()` will try to write it anyway and will overwrite the memory addresses after the limits.
 
 ```c
 void vuln(char *input){
@@ -92,14 +92,14 @@ void vuln(char *input){
 }
 ```
 
-We can see that in the `main` function it's used `gets` that is another buffer overflow vulnerable function.
+We can see that in the `main()` function it's used `gets()` that is another buffer overflow vulnerable function.
 
 ```c
 char buf1[100];
   gets(buf1);
 ```
 
-Let's exploit `strcpy` by feeding the program with inputs longer than 16 bytes.
+Let's exploit `strcpy()` by feeding the program with inputs longer than 16 bytes.
 
 ```bash
 $ python -c 'print "A" * 16' | ./vuln
@@ -120,5 +120,5 @@ We can now exploit the remote service and get some points
 
 ```bash
 $ python -c 'print "A" * 20' | nc saturn.picoctf.net 65355
-Input: picoCTF{ov3rfl0ws_ar3nt_that_bad_34d6b87f}
+Input: picoCTF{ov3rfl0ws_ar3nt_that_bad_[redacted]}
 ```
