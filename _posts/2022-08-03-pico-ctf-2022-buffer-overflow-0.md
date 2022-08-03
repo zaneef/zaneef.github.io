@@ -17,7 +17,7 @@ $ pwn checksec vuln
     PIE:      PIE enabled
 ```
 
-We can see that it's a 32 bit ELF file dinamically linked and not stripped. If we attempt to execute it, we are prompted for a text file named `flag.txt`. Let's create it and run the file again.
+We can see that it's a 32 bit ELF file dinamically linked and not stripped. If we attempt to execute it, we are prompted for a text file named `flag.txt`. Let's create it and run the binary again.
 
 ```bash
 $ echo "Buffer Overflow HERE" >> flag.txt
@@ -81,7 +81,7 @@ There's only one function that should stands out and it's `sigsegv_handler`. Thi
 signal(SIGSEGV, sigsegv_handler); // Set up signal handler
 ```
 
-With a simple search we can read that `signal` _"sets a function to handle signal i.e. a signal handler with signal numer sig"_ and `SIGSEV` is _"a signal propagated when a program tries to read or write outside the memory it is allocated for it"_. With these two definitions we can deduce that this program, when there's an invalid storage read or write, calls the handler that prints the flag.
+With a simple online search we can read that `signal` _"sets a function to handle signal i.e. a signal handler with signal numer sig"_ and `SIGSEV` is _"a signal propagated when a program tries to read or write outside the memory it is allocated for it"_. With these two definitions we can deduce that this program, when there's an invalid storage read or write, calls the handler that prints the flag.
 
 We have to write or read outside the program boundaries. Check the source code again and we can see that the function `vuln` uses `strcpy` to copy the input string into a buffer. `strcpy` is a function vulnerable to buffer overflow so if we pass an input larger than the buffer that sould contain it, `strcpy` will try to write it anyway and will overwrite the memory addresses after the limits.
 
@@ -109,7 +109,7 @@ $ python -c 'print "A" * 20' | ./vuln
 Input: Buffer Overflow HERE
 ``` 
 
-With an input of 20 bytes the program prints out the content of our `flag.txt` file. This means that the program tried to write outside its boundaries and generated a SIGSEV signal. We can confirm our assumption with this command
+With an input of 20 bytes the program prints out the content of our `flag.txt` file. This means that the program tried to write outside its boundaries and generated a segmentation fault signal. We can confirm our assumption with this command
 
 ```bash
 $ sudo dmesg
