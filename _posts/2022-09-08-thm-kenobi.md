@@ -1,6 +1,6 @@
 ---
 title: THM - Kenobi
-tags: [thm, smb, ftp, proftpd 1.3.5, suid]
+tags: [thm, smb, ftp, proftpd 1.3.5, CVE-2015-3306, suid]
 ---
 
 <div style="text-align:center;">
