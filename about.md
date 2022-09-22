@@ -12,6 +12,9 @@ I'm interested in almost every aspect of cybersecurity but I primarily focus on 
 
 I'm also an active CTF player <a href="https://ctftime.org/team/194130" target="_blank">@bhackari</a>.
 
+**tryhackme**
+<script src="https://tryhackme.com/badge/61121"></script>
+
 **may u needs ✨**
 
 - {{ site.author.email }}
