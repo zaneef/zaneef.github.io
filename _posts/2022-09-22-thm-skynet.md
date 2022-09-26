@@ -1,6 +1,6 @@
 ---
 title: THM - Skynet
-tags: [thm, smb, cuppa cms, linux wildcard exploitation]
+tags: [thm, smb, cuppa cms, wildcard injection]
 ---
 
 <div style="text-align:center;">
