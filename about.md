@@ -8,12 +8,13 @@ comments: false
 
 I'm **zan.e**, I'm an 🇮🇹 IT student at Ca' Foscari University of Venice.
 
-I'm interested in almost every aspect of cybersecurity but I primarily focus on web and network security. I'm kinda attracted to cryptography too but I don't really understand those shenanigans.
+I'm interested in almost every aspect of cybersecurity but I primarily focus on web application and network security. I'm kinda attracted to cryptography too but I don't really understand those shenanigans.
 
-I'm also an active CTF player <a href="https://ctftime.org/team/194130" target="_blank">@bhackari</a>.
+I'm also an active CTF player <a href="https://ctftime.org/team/194130" target="_blank">@bhackari</a>
 
 **tryhackme**
-<script src="https://tryhackme.com/badge/61121"></script>
+
+<img src="https://tryhackme-badges.s3.amazonaws.com/zan.eee.png" alt="TryHackMe">
 
 **may u needs ✨**
 
