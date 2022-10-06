@@ -32,14 +32,13 @@ After a little bit of thinkering, the attacker proceeded to clone this Github re
 We can see that the attacker, before executing the backdoor, looked at the content of `/etc/passwd` file in which are stored all users hashed passwords. We can try to crack them with John The Ripper. Copy and paste the following lines inside a text file.
 
 ```
-$6$7GS5e.yv$HqIH5MthpGWpczr3MnwDHlED8gbVSHt7ma8yxzBM8LuBReDV5e1Pu/VuRskugt1Ckul/SKGX.5PyMpzAYo3Cg/
 $6$oRXQu43X$WaAj3Z/4sEPV1mJdHsyJkIZm1rjjnNxrY5c8GElJIjG7u36xSgMGwKA2woDIFudtyqY37YCyukiHJPhi4IU7H0
 $6$B.EnuXiO$f/u00HosZIO3UQCEJplazoQtH8WJjSX/ooBjwmYfEOTcqCAlMjeFIgYWqR5Aj2vsfRyf6x1wXxKitcPUjcXlX/
 $6$.SqHrp6z$B4rWPi0Hkj0gbQMFujz1KHVs9VrSFu7AU9CxWrZV7GzH05tYPL1xRzUJlFHbyp0K9TAeY1M6niFseB9VLBWSo0
 $6$SWybS8o2$9diveQinxy8PJQnGQQWbTNKeb2AiSp.i8KznuAjYbqI3q04Rf5hjHPer3weiC.2MrOj2o1Sw/fd2cu0kC6dUP.
 ```
 
-The machine's tasks tells us to use fasttrack wordlist to crack the the passwords.
+The machine's tasks tells us to use fasttrack wordlist to crack the passwords.
 
 ```
 $ john --wordlist=./fasttrack.txt hashes
@@ -50,9 +49,9 @@ secret12         (?)
 secuirty3        (?)     
 ```
 
-JTR was able to crack 4 hashes.
+JTR was able to crack all the hashes.
 
-## Reseearch - Analyse the code
+## Research - Analyse the code
 
 We have to do some simple code analysis on the backdoor. Let's clone the repo on our machine.
 
@@ -89,7 +88,7 @@ To see which hash did the attacker use, we have to return back on the PCAP file.
 6d05358f090eea56a238af02e47d44ee5489d234810ef6240280857ec69712a3e5e370b8a41899d0196ade16c0d54327c5654019292cbfe0b5e98ad1fec71bed
 ```
 
-Inside the `main.go` file, we are able to see the usage of `SHA-512`. We can try to crack the hash with hashcat. Just search for the SHA-512 password + salt option (1710) and put the values toghether inside a text file
+Inside the `main.go` file, we are able to see the usage of `SHA-512`. We can try to crack the hash with hashcat. Just search for the SHA-512 password + salt option inside the ([Hashcat Wiki](https://hashcat.net/wiki/doku.php?id=example_hashes)) and paste them toghether inside a text file (separated by a semicolon)
 
 ```
 $ hashcat -m 1710 hash /usr/share/wordlists/rockyou.txt
@@ -97,11 +96,11 @@ $ hashcat -m 1710 hash /usr/share/wordlists/rockyou.txt
 6d05358f090eea56a238af02e47d44ee5489d234810ef6240280857ec69712a3e5e370b8a41899d0196ade16c0d54327c5654019292cbfe0b5e98ad1fec71bed:1c362db832f3f864c8c2fe05f2002a05:november16
 ```
 
-The cracked passwrd is `november16`.
+The cracked password is `november16`. This password is the one used by the attacker to log back into the machine as `james`.
 
 ## Attack - Get back in!
 
-We have to hack back into the machine. Let's try to log in with `james` user since we found his password in the step before.
+We have to hack back into the machine. Let's try to log in with `james` user through the backdoor since we found his password in the step before.
 
 ```
 $ ssh -p 2222 james@10.10.68.50 -oHostKeyAlgorithms=+ssh-rsa
