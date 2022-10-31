@@ -1,6 +1,6 @@
 ---
 title: THM - tomghost
-tags: [thm, ]
+tags: [thm, CVE-2019-1938, ghostcat, ]
 ---
 
 <div style="text-align:center;">
@@ -34,9 +34,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Start with the web server accessible at the port 8080. Nothing more interesting rather than Apache Tomcat default page.
 
-![]()
-
-With a simple online search we can see a pretty known vulnerability for the same version: Ghostcat. This vulnerability, classified as CVE-2019-1938, is a file read/inclusion vulnerability in the AJP connector in Apache Tomcat. This is enabled by default with a default configuration port of 8009. A remote, unauthenticated attacker, could exploit this vulnerability to read web application files from a vulnerable server. In instances where the vulnerable web server allows file upload, an attacker could upload malicious JSP code within a variety of file types and trigger this vulnerability to gain remote code execution.
+With a simple online search we can see a pretty known vulnerability for the same version: Ghostcat. This vulnerability, classified as `CVE-2019-1938`, is a file read/inclusion vulnerability in the AJP connector in Apache Tomcat. This is enabled by default with a default configuration port of 8009. A remote, unauthenticated attacker, could exploit this vulnerability to read web application files from a vulnerable server. In instances where the vulnerable web server allows file upload, an attacker could upload malicious JSP code within a variety of file types and trigger this vulnerability to gain remote code execution.
 
 Let's use searchsploit to find some potential exploits.
 
@@ -79,7 +77,7 @@ $ ssh skyfuck@10.10.23.208
 skyfuck@ubuntu:~$
 ```
 
-The `home/merlin` directory is group readable. We can read the user flag inside his home directory
+The `/home/merlin` directory is group readable. We can read the user flag inside his home directory
 
 ```
 skyfuck@ubuntu:~$ cat /home/merlin/user.txt
